@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Kettle Yu</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root{
+      --bg:#0b0d17;--bg2:#0f1120;--bg3:#141728;--bg4:#1a1f35;
+      --accent:#00f5a0;--accent2:#00c8ff;--danger:#f72585;
+      --text:#e0e6ed;--muted:#6b6b80;
+      --border:rgba(255,255,255,0.07);--card:rgba(255,255,255,0.03);
+      --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
+      --r:14px;--ease:cubic-bezier(.23,1,.32,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{font-size:62.5%}
+    body{font-family:var(--fb);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+    /* ── LOGIN ── */
+    .login{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:2rem}
+    .lbox{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:5rem;width:100%;max-width:420px;position:relative;overflow:hidden}
+    .lbox::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+    .licon{width:6rem;height:6rem;border-radius:16px;background:rgba(0,245,160,.1);border:1px solid rgba(0,245,160,.2);display:flex;align-items:center;justify-content:center;font-size:2.4rem;color:var(--accent);margin-bottom:2.8rem}
+    .ltitle{font-family:var(--fh);font-size:2.8rem;font-weight:800;color:#f0f0f5;margin-bottom:.6rem}
+    .lsub{font-size:1.4rem;color:var(--muted);margin-bottom:3.5rem}
+    .lfield{margin-bottom:1.6rem}
+    .llabel{display:block;font-size:1.2rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+    .linput{width:100%;padding:1.4rem 1.8rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--fb);font-size:1.5rem;transition:border-color .25s;outline:none}
+    .linput:focus{border-color:var(--accent)}
+    .lbtn{width:100%;padding:1.5rem;background:var(--accent);color:#0b0d17;border:none;border-radius:10px;font-family:var(--fh);font-size:1.6rem;font-weight:700;cursor:pointer;margin-top:.8rem;transition:opacity .25s}
+    .lbtn:hover{opacity:.88}
+    .lerr{display:none;margin-top:1.2rem;padding:1.2rem 1.6rem;background:rgba(247,37,133,.1);border:1px solid rgba(247,37,133,.25);border-radius:8px;font-size:1.3rem;color:var(--danger);text-align:center}
+    .lerr.show{display:block}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+    .lbox.shake{animation:shake .4s ease}
+
+    /* ── PANEL ── */
+    .panel{display:none}
+    .panel.on{display:block}
+
+    /* Admin Header */
+    .ahdr{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(11,13,23,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .ahdr-in{max-width:1400px;margin:auto;padding:0 4rem;height:7rem;display:flex;align-items:center;justify-content:space-between}
+    .abrand{font-family:var(--fh);font-size:1.8rem;font-weight:700;color:#f0f0f5;display:flex;align-items:center;gap:1.2rem}
+    .abrand span{color:var(--accent)}
+    .abadge{padding:5px 12px;background:rgba(0,245,160,.1);border:1px solid rgba(0,245,160,.2);border-radius:100px;font-size:1.1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+    .ahdr-r{display:flex;align-items:center;gap:1.2rem}
+    .ibtn{display:inline-flex;align-items:center;gap:8px;padding:.9rem 2rem;border-radius:8px;font-size:1.3rem;font-weight:600;cursor:pointer;transition:all .25s;font-family:var(--fb);border:none}
+    .ibtn-o{background:transparent;color:var(--muted);border:1px solid var(--border) !important}
+    .ibtn-o:hover{color:var(--text);border-color:rgba(255,255,255,.2) !important}
+    .ibtn-d{background:rgba(247,37,133,.1);color:var(--danger);border:1px solid rgba(247,37,133,.2) !important}
+    .ibtn-d:hover{background:rgba(247,37,133,.2)}
+
+    /* Layout */
+    .alayout{display:grid;grid-template-columns:300px 1fr;padding-top:7rem;min-height:100vh}
+
+    /* Sidebar */
+    .aside{position:sticky;top:7rem;height:calc(100vh - 7rem);overflow-y:auto;background:var(--bg2);border-right:1px solid var(--border);padding:3rem 2rem}
+    .aside-sec{margin-bottom:3.5rem}
+    .aside-lbl{font-size:1.1rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;padding:0 1rem}
+    .aside-item{display:flex;align-items:center;gap:1.2rem;padding:1.2rem 1.4rem;border-radius:10px;font-size:1.4rem;color:var(--muted);cursor:pointer;transition:all .25s;margin-bottom:.4rem;border:none;background:transparent;width:100%;text-align:left;font-family:var(--fb)}
+    .aside-item i{width:1.6rem;text-align:center}
+    .aside-item:hover{background:var(--card);color:var(--text)}
+    .aside-item.on{background:rgba(0,245,160,.08);color:var(--accent);border:1px solid rgba(0,245,160,.15)}
+    .aside-stats{display:flex;flex-direction:column;gap:1.2rem}
+    .aside-stat{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;background:var(--card);border:1px solid var(--border);border-radius:10px}
+    .aside-stat label{font-size:1.3rem;color:var(--muted)}
+    .aside-stat span{font-family:var(--fh);font-size:1.8rem;font-weight:700;color:var(--accent)}
+    .tip{font-size:1.25rem;color:var(--muted);line-height:1.75;padding:0 .5rem}
+    .tip a{color:var(--accent)}
+
+    /* Main */
+    .amain{padding:4rem;position:relative;z-index:1}
+    .atab{display:none}
+    .atab.on{display:block}
+    .tab-hdr{margin-bottom:3.5rem}
+    .tab-hdr h2{font-family:var(--fh);font-size:2.8rem;font-weight:800;color:#f0f0f5;margin-bottom:.6rem}
+    .tab-hdr p{font-size:1.4rem;color:var(--muted)}
+
+    /* Form */
+    .form-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4rem;position:relative;overflow:hidden}
+    .form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+    .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .fgrid .full{grid-column:1/-1}
+    .field{display:flex;flex-direction:column;gap:.8rem}
+    .field label{font-size:1.2rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .field input,.field select,.field textarea{padding:1.3rem 1.6rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--fb);font-size:1.4rem;outline:none;transition:border-color .25s}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+    .field select option{background:var(--bg3)}
+    .field textarea{resize:vertical;min-height:100px}
+    .hint{font-size:1.1rem;color:var(--muted);margin-top:4px}
+
+    .url-row{display:flex;gap:1rem}
+    .url-row input{flex:1}
+    .prev-btn{padding:0 1.6rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:1.3rem;cursor:pointer;white-space:nowrap;transition:all .25s;font-family:var(--fb);display:flex;align-items:center;gap:6px}
+    .prev-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .pbox{display:none;margin-top:1.2rem;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--bg3)}
+    .pbox.show{display:block}
+    .pbox img,.pbox video{width:100%;max-height:260px;object-fit:cover;display:block}
+    .pbox iframe{width:100%;aspect-ratio:16/9;border:none;display:block}
+
+    .form-actions{display:flex;align-items:center;justify-content:flex-end;gap:1.2rem;margin-top:2.8rem;padding-top:2.8rem;border-top:1px solid var(--border)}
+    .btn-p{display:inline-flex;align-items:center;gap:10px;padding:1.4rem 3.2rem;background:var(--accent);color:#0b0d17;border:none;border-radius:10px;font-family:var(--fh);font-size:1.5rem;font-weight:700;cursor:pointer;transition:opacity .25s}
+    .btn-p:hover{opacity:.88}
+    .btn-s{display:inline-flex;align-items:center;gap:10px;padding:1.4rem 2.4rem;background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:10px;font-family:var(--fb);font-size:1.4rem;cursor:pointer;transition:all .25s}
+    .btn-s:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+    .btn-warn{display:inline-flex;align-items:center;gap:10px;padding:1.4rem 2.4rem;background:rgba(247,37,133,.1);color:var(--danger);border:1px solid rgba(247,37,133,.2);border-radius:10px;font-family:var(--fb);font-size:1.4rem;cursor:pointer;transition:all .25s}
+    .btn-warn:hover{background:rgba(247,37,133,.18)}
+
+    /* Table */
+    .tbl-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+    .tbl-hdr,.tbl-row{display:grid;grid-template-columns:70px 1fr 100px 100px 110px 100px;gap:1rem;padding:1.4rem 2.4rem;align-items:center}
+    .tbl-hdr{background:var(--bg3);border-bottom:1px solid var(--border);font-size:1.1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .tbl-row{border-bottom:1px solid var(--border);transition:background .2s}
+    .tbl-row:last-child{border-bottom:none}
+    .tbl-row:hover{background:rgba(255,255,255,.02)}
+    .thumb{width:60px;height:44px;border-radius:8px;overflow:hidden;background:var(--bg3);flex-shrink:0}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb .no-th{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--muted)}
+    .row-title{font-size:1.4rem;font-weight:600;color:#f0f0f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .row-title small{display:block;font-size:1.2rem;color:var(--muted);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pill{padding:4px 12px;border-radius:100px;font-size:1.1rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;width:fit-content}
+    .pill-v{background:rgba(0,200,255,.1);color:var(--accent2);border:1px solid rgba(0,200,255,.2)}
+    .pill-d{background:rgba(0,245,160,.08);color:var(--accent);border:1px solid rgba(0,245,160,.15)}
+    .row-yr,.row-cat{font-size:1.3rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .row-actions{display:flex;gap:6px;justify-content:flex-end}
+    .icn{width:3.2rem;height:3.2rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s}
+    .icn-e:hover{background:rgba(0,245,160,.08);border-color:rgba(0,245,160,.2);color:var(--accent)}
+    .icn-u:hover,.icn-d:hover{background:rgba(0,245,160,.08);border-color:rgba(0,245,160,.2);color:var(--accent)}
+    .icn-x:hover{background:rgba(247,37,133,.1);border-color:rgba(247,37,133,.25);color:var(--danger)}
+    .t-empty{padding:6rem 2rem;text-align:center;color:var(--muted)}
+    .t-empty i{font-size:3rem;margin-bottom:1.5rem;opacity:.3;display:block}
+    .t-empty p{font-size:1.5rem}
+
+    /* Confirm modal */
+    .modal{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:2rem}
+    .modal.open{display:flex}
+    .mbox{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4rem;max-width:420px;width:100%;text-align:center}
+    .mbox i{font-size:3.5rem;color:var(--danger);margin-bottom:2rem}
+    .mbox h3{font-family:var(--fh);font-size:2.2rem;color:#f0f0f5;margin-bottom:1rem}
+    .mbox p{font-size:1.4rem;color:var(--muted);margin-bottom:3rem;line-height:1.6}
+    .mbox-btns{display:flex;gap:1.2rem;justify-content:center}
+
+    /* Toast */
+    .toast{position:fixed;bottom:3rem;right:3rem;z-index:9999;padding:1.5rem 2.5rem;border-radius:12px;font-size:1.4rem;font-weight:600;display:flex;align-items:center;gap:1rem;transform:translateY(10px);opacity:0;transition:all .3s;pointer-events:none}
+    .toast.show{transform:translateY(0);opacity:1}
+    .toast-ok{background:rgba(0,245,160,.12);border:1px solid rgba(0,245,160,.25);color:var(--accent)}
+    .toast-err{background:rgba(247,37,133,.12);border:1px solid rgba(247,37,133,.25);color:var(--danger)}
+
+    /* Spinner */
+    .spin{display:inline-block;width:1.6rem;height:1.6rem;border:2px solid rgba(11,13,23,.3);border-top-color:#0b0d17;border-radius:50%;animation:sp .6s linear infinite}
+    @keyframes sp{to{transform:rotate(360deg)}}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      html{font-size:57%}
+      .alayout{grid-template-columns:1fr}
+      .aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+      .amain{padding:3rem 2.5rem}
+      .fgrid{grid-template-columns:1fr}
+      .fgrid .full{grid-column:1}
+      .tbl-hdr,.tbl-row{grid-template-columns:55px 1fr 90px 80px}
+      .tbl-hdr>*:nth-child(5),.tbl-hdr>*:nth-child(6),
+      .tbl-row>*:nth-child(5),.tbl-row>*:nth-child(6){display:none}
+    }
+    @media(max-width:600px){
+      .amain{padding:2rem}
+      .form-card{padding:2.5rem 2rem}
+      .ahdr-in{padding:0 2rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="loginScreen">
+  <div class="lbox" id="lbox">
+    <div class="licon"><i class="fas fa-shield-halved"></i></div>
+    <h1 class="ltitle">Owner Access</h1>
+    <p class="lsub">Restricted to Kettle Yu only.</p>
+    <div class="lfield">
+      <label class="llabel">Username</label>
+      <input class="linput" id="lu" type="text" placeholder="Username" autocomplete="username" />
+    </div>
+    <div class="lfield">
+      <label class="llabel">Password</label>
+      <input class="linput" id="lp" type="password" placeholder="Password" autocomplete="current-password" />
+    </div>
+    <button class="lbtn" id="loginBtn"><i class="fas fa-arrow-right"></i> Sign In</button>
+    <div class="lerr" id="lerr"><i class="fas fa-triangle-exclamation"></i> Wrong credentials. Try again.</div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div class="panel" id="panel">
+
+  <header class="ahdr">
+    <div class="ahdr-in">
+      <div class="abrand">Kettle<span>.</span> <span class="abadge">Admin</span></div>
+      <div class="ahdr-r">
+        <a href="./work.html" target="_blank" class="ibtn ibtn-o"><i class="fas fa-external-link-alt"></i> View Gallery</a>
+        <button class="ibtn ibtn-d" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="alayout">
+
+    <aside class="aside">
+      <div class="aside-sec">
+        <div class="aside-lbl">Menu</div>
+        <button class="aside-item on" onclick="goTab('upload')"><i class="fas fa-plus-circle"></i> Add New Work</button>
+        <button class="aside-item" onclick="goTab('manage')"><i class="fas fa-table-cells"></i> Manage Works</button>
+      </div>
+      <div class="aside-sec">
+        <div class="aside-lbl">Overview</div>
+        <div class="aside-stats">
+          <div class="aside-stat"><label>Total</label><span id="st0">—</span></div>
+          <div class="aside-stat"><label>Designs</label><span id="st1">—</span></div>
+          <div class="aside-stat"><label>Videos</label><span id="st2">—</span></div>
+        </div>
+      </div>
+      <div class="aside-sec">
+        <div class="aside-lbl">Quick Tip</div>
+        <p class="tip">Upload images to <a href="https://cloudinary.com" target="_blank">Cloudinary</a> or <a href="https://imgur.com" target="_blank">Imgur</a> and paste the URL. For videos, paste a YouTube or Vimeo link.</p>
+      </div>
+    </aside>
+
+    <main class="amain">
+
+      <!-- UPLOAD TAB -->
+      <div class="atab on" id="tab-upload">
+        <div class="tab-hdr">
+          <h2 id="formHeading">Add New Work</h2>
+          <p id="formSub">Fill in the details and paste a hosted URL.</p>
+        </div>
+        <div class="form-card">
+          <input type="hidden" id="editId" value="" />
+          <div class="fgrid">
+            <div class="field">
+              <label>Title *</label>
+              <input id="fTitle" type="text" placeholder="e.g. Brand Identity for XYZ" />
+            </div>
+            <div class="field">
+              <label>Type *</label>
+              <select id="fType" onchange="onTypeChange()">
+                <option value="design">Design</option>
+                <option value="video">Video</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Category</label>
+              <input id="fCat" type="text" placeholder="e.g. Flyer Design, Branding, Motion" />
+            </div>
+            <div class="field">
+              <label>Year</label>
+              <input id="fYear" type="number" placeholder="2025" min="2000" max="2099" />
+            </div>
+            <div class="field full">
+              <label id="urlLbl">Image URL *</label>
+              <div class="url-row">
+                <input id="fUrl" type="url" placeholder="https://res.cloudinary.com/... or https://i.imgur.com/..." />
+                <button class="prev-btn" onclick="previewURL()"><i class="fas fa-eye"></i> Preview</button>
+              </div>
+              <p class="hint" id="urlHint">Upload to Cloudinary or Imgur and paste the direct image URL.</p>
+              <div class="pbox" id="pbox"></div>
+            </div>
+            <div class="field full" id="thumbField" style="display:none">
+              <label>Thumbnail URL <small style="text-transform:none;font-weight:400;opacity:.6">(optional)</small></label>
+              <input id="fThumb" type="url" placeholder="Custom thumbnail — leave blank to auto-generate from YouTube" />
+            </div>
+            <div class="field full">
+              <label>Description</label>
+              <textarea id="fDesc" placeholder="Brief description of this work..."></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-s" onclick="clearForm()"><i class="fas fa-rotate-left"></i> Clear</button>
+            <button class="btn-warn" id="cancelEditBtn" onclick="cancelEdit()" style="display:none"><i class="fas fa-times"></i> Cancel Edit</button>
+            <button class="btn-p" id="submitBtn" onclick="submitWork()"><i class="fas fa-plus"></i> Add to Gallery</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MANAGE TAB -->
+      <div class="atab" id="tab-manage">
+        <div class="tab-hdr">
+          <h2>Manage Works</h2>
+          <p>Edit, reorder, or remove works from your gallery.</p>
+        </div>
+        <div class="tbl-wrap">
+          <div class="tbl-hdr">
+            <span>Thumb</span><span>Title</span><span>Type</span>
+            <span>Year</span><span>Category</span><span style="text-align:right">Actions</span>
+          </div>
+          <div id="tblBody"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Confirm modal -->
+<div class="modal" id="confirmModal">
+  <div class="mbox">
+    <i class="fas fa-trash-can"></i>
+    <h3>Delete this work?</h3>
+    <p>This will permanently remove it from your gallery. This cannot be undone.</p>
+    <div class="mbox-btns">
+      <button class="btn-s" onclick="closeModal()">Cancel</button>
+      <button class="btn-warn" id="confirmDelBtn">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════════════
+   JSONBIN CONFIG — same as work.html
+   ────────────────────────────────────────────────
+   1. Go to https://jsonbin.io → create free account
+   2. Create Bin with content: {"works":[]}
+   3. Copy BIN ID and your API Master Key
+   4. Paste below, save file — done!
+   ════════════════════════════════════════════════ */
+const BIN_ID  = 'https://api.jsonbin.io/v3/b/69a1bb76ae596e708f4fb845';
+const API_KEY = '$2a$10$XBq7Ft..xtvrP4BtB1qlVe/xRldmMvsf4ilmY8Sk5J58qn2sIkeWe';
+const BASE    = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+/* ─── Auth ─── */
+const ADMIN_USER = 'kettle-yu';
+const ADMIN_PASS = 'Hellodear25';   // ← change this
+
+function loggedIn() { return sessionStorage.getItem('ky_admin') === '1'; }
+
+document.getElementById('loginBtn').onclick = tryLogin;
+document.getElementById('lp').onkeydown = e => { if(e.key==='Enter') tryLogin(); };
+
+function tryLogin() {
+  const u = document.getElementById('lu').value.trim();
+  const p = document.getElementById('lp').value;
+  if (u===ADMIN_USER && p===ADMIN_PASS) {
+    sessionStorage.setItem('ky_admin','1');
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('panel').classList.add('on');
+    init();
+  } else {
+    document.getElementById('lerr').classList.add('show');
+    const b = document.getElementById('lbox');
+    b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+    document.getElementById('lp').value='';
+    document.getElementById('lp').focus();
+  }
+}
+
+document.getElementById('logoutBtn').onclick = () => { sessionStorage.removeItem('ky_admin'); location.reload(); };
+
+/* ─── JSONBin API ─── */
+let WORKS = [];
+
+async function fetchWorks() {
+  if (BIN_ID==='YOUR_BIN_ID_HERE') return [];
+  const r = await fetch(BASE+'/latest', { headers:{'X-Master-Key':API_KEY} });
+  const d = await r.json();
+  return d.record?.works || [];
+}
+
+async function saveWorks(works) {
+  if (BIN_ID==='YOUR_BIN_ID_HERE') {
+    toast('⚠ JSONBin not configured yet — data not saved to server.', 'err');
+    return true;
+  }
+  const r = await fetch(BASE, {
+    method: 'PUT',
+    headers: { 'Content-Type':'application/json', 'X-Master-Key':API_KEY },
+    body: JSON.stringify({ works })
+  });
+  return r.ok;
+}
+
+/* ─── Init ─── */
+async function init() {
+  setSubmitLoading(true);
+  try { WORKS = await fetchWorks(); } catch { WORKS = []; }
+  setSubmitLoading(false);
+  refreshStats();
+  renderTable();
+}
+
+function refreshStats() {
+  document.getElementById('st0').textContent = WORKS.length;
+  document.getElementById('st1').textContent = WORKS.filter(w=>w.type==='design').length;
+  document.getElementById('st2').textContent = WORKS.filter(w=>w.type==='video').length;
+}
+
+/* ─── Tabs ─── */
+function goTab(name) {
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.aside-item').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+name).classList.add('on');
+  document.querySelectorAll('.aside-item')[name==='upload'?0:1].classList.add('on');
+  if(name==='manage') renderTable();
+}
+
+/* ─── Form ─── */
+function onTypeChange() {
+  const t = document.getElementById('fType').value;
+  const isVid = t==='video';
+  document.getElementById('urlLbl').textContent   = isVid ? 'Video URL *' : 'Image URL *';
+  document.getElementById('urlHint').textContent  = isVid
+    ? 'Paste a YouTube (https://youtube.com/watch?v=...) or Vimeo link.'
+    : 'Upload to Cloudinary or Imgur and paste the direct image URL.';
+  document.getElementById('fUrl').placeholder     = isVid
+    ? 'https://www.youtube.com/watch?v=...'
+    : 'https://res.cloudinary.com/... or https://i.imgur.com/...';
+  document.getElementById('thumbField').style.display = isVid ? 'flex' : 'none';
+  closePbox();
+}
+
+function previewURL() {
+  const url  = document.getElementById('fUrl').value.trim();
+  const type = document.getElementById('fType').value;
+  const box  = document.getElementById('pbox');
+  if (!url) { toast('Enter a URL first','err'); return; }
+  box.innerHTML = '';
+  if (type==='video') {
+    const em = embedUrl(url);
+    box.innerHTML = em ? `<iframe src="${em}" allowfullscreen></iframe>`
+                       : `<video src="${url}" controls style="max-height:260px;width:100%"></video>`;
+  } else {
+    box.innerHTML = `<img src="${url}" alt="preview" onerror="this.parentElement.innerHTML='<p style=padding:2rem;font-size:1.4rem;color:var(--muted)>Could not load. Check the URL.</p>'" />`;
+  }
+  box.classList.add('show');
+}
+
+function closePbox() {
+  const b = document.getElementById('pbox');
+  b.innerHTML=''; b.classList.remove('show');
+}
+
+function clearForm() {
+  ['fTitle','fUrl','fThumb','fCat','fDesc'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('fType').value='design';
+  document.getElementById('fYear').value='';
+  document.getElementById('editId').value='';
+  document.getElementById('formHeading').textContent='Add New Work';
+  document.getElementById('formSub').textContent='Fill in the details and paste a hosted URL.';
+  document.getElementById('submitBtn').innerHTML='<i class="fas fa-plus"></i> Add to Gallery';
+  document.getElementById('cancelEditBtn').style.display='none';
+  closePbox(); onTypeChange();
+}
+
+function cancelEdit() { clearForm(); }
+
+/* ─── Submit (Add or Update) ─── */
+async function submitWork() {
+  const title = document.getElementById('fTitle').value.trim();
+  const url   = document.getElementById('fUrl').value.trim();
+  if (!title) { toast('Please enter a title','err'); return; }
+  if (!url)   { toast('Please enter a URL','err'); return; }
+
+  const editId = document.getElementById('editId').value;
+  const work = {
+    id:        editId ? parseInt(editId) : Date.now(),
+    title,
+    type:      document.getElementById('fType').value,
+    url,
+    thumbnail: document.getElementById('fThumb').value.trim(),
+    category:  document.getElementById('fCat').value.trim() || document.getElementById('fType').value,
+    year:      parseInt(document.getElementById('fYear').value) || new Date().getFullYear(),
+    desc:      document.getElementById('fDesc').value.trim(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  setSubmitLoading(true);
+  let newWorks;
+  if (editId) {
+    newWorks = WORKS.map(w => w.id===parseInt(editId) ? work : w);
+  } else {
+    work.createdAt = new Date().toISOString();
+    newWorks = [work, ...WORKS];
+  }
+
+  const ok = await saveWorks(newWorks);
+  setSubmitLoading(false);
+
+  if (ok) {
+    WORKS = newWorks;
+    clearForm();
+    refreshStats();
+    toast(editId ? 'Work updated!' : 'Work added to gallery!', 'ok');
+  } else {
+    toast('Save failed. Check your JSONBin config.','err');
+  }
+}
+
+function setSubmitLoading(on) {
+  const btn = document.getElementById('submitBtn');
+  const isEdit = document.getElementById('editId').value;
+  if (on) btn.innerHTML='<span class="spin"></span> Saving…';
+  else btn.innerHTML = isEdit ? '<i class="fas fa-check"></i> Save Changes' : '<i class="fas fa-plus"></i> Add to Gallery';
+  btn.disabled = on;
+}
+
+/* ─── Edit ─── */
+function editWork(index) {
+  const w = WORKS[index];
+  if (!w) return;
+  document.getElementById('editId').value = w.id;
+  document.getElementById('fTitle').value = w.title;
+  document.getElementById('fType').value  = w.type;
+  document.getElementById('fUrl').value   = w.url;
+  document.getElementById('fThumb').value = w.thumbnail||'';
+  document.getElementById('fCat').value   = w.category||'';
+  document.getElementById('fYear').value  = w.year||'';
+  document.getElementById('fDesc').value  = w.desc||'';
+  onTypeChange();
+  document.getElementById('formHeading').textContent='Edit Work';
+  document.getElementById('formSub').textContent='Update the details below and save.';
+  document.getElementById('submitBtn').innerHTML='<i class="fas fa-check"></i> Save Changes';
+  document.getElementById('cancelEditBtn').style.display='inline-flex';
+  goTab('upload');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ─── Delete ─── */
+let pendingDeleteIdx = null;
+
+function askDelete(index) {
+  pendingDeleteIdx = index;
+  document.getElementById('confirmModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('confirmModal').classList.remove('open');
+  pendingDeleteIdx = null;
+}
+
+document.getElementById('confirmDelBtn').onclick = async () => {
+  if (pendingDeleteIdx === null) return;
+  closeModal();
+  const newWorks = WORKS.filter((_,i)=>i!==pendingDeleteIdx);
+  setSubmitLoading(true);
+  const ok = await saveWorks(newWorks);
+  setSubmitLoading(false);
+  if (ok) { WORKS=newWorks; refreshStats(); renderTable(); toast('Work deleted.','ok'); }
+  else toast('Delete failed.','err');
+};
+
+/* ─── Move ─── */
+async function moveWork(index, dir) {
+  const ni = index+dir;
+  if (ni<0||ni>=WORKS.length) return;
+  const w=[...WORKS];
+  [w[index],w[ni]]=[w[ni],w[index]];
+  const ok = await saveWorks(w);
+  if(ok){ WORKS=w; renderTable(); }
+}
+
+/* ─── Table ─── */
+function renderTable() {
+  const body = document.getElementById('tblBody');
+  if (!WORKS.length) {
+    body.innerHTML=`<div class="t-empty"><i class="fas fa-inbox"></i><p>No works uploaded yet.</p></div>`;
+    return;
+  }
+  body.innerHTML = WORKS.map((w,i) => {
+    const th = w.type==='design' ? w.url : (w.thumbnail || ytThumb(w.url));
+    const thumbHtml = th
+      ? `<img src="${th}" alt="${w.title}" onerror="this.style.display='none'" />`
+      : `<div class="no-th"><i class="fas fa-film"></i></div>`;
+    return `<div class="tbl-row">
+      <div class="thumb">${thumbHtml}</div>
+      <div class="row-title">${w.title}<small>${w.url.length>45?w.url.slice(0,45)+'…':w.url}</small></div>
+      <div><span class="pill pill-${w.type[0]}">${w.type}</span></div>
+      <div class="row-yr">${w.year||'—'}</div>
+      <div class="row-cat">${w.category||'—'}</div>
+      <div class="row-actions">
+        <button class="icn icn-u" onclick="moveWork(${i},-1)" title="Move up"><i class="fas fa-chevron-up"></i></button>
+        <button class="icn icn-d" onclick="moveWork(${i},1)" title="Move down"><i class="fas fa-chevron-down"></i></button>
+        <button class="icn icn-e" onclick="editWork(${i})" title="Edit"><i class="fas fa-pen"></i></button>
+        <button class="icn icn-x" onclick="askDelete(${i})" title="Delete"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ─── Helpers ─── */
+function ytThumb(url) {
+  try {
+    if (url.includes('youtu.be')) return `https://img.youtube.com/vi/${url.split('youtu.be/')[1]?.split('?')[0]}/mqdefault.jpg`;
+    if (url.includes('youtube.com/watch')) return `https://img.youtube.com/vi/${new URL(url).searchParams.get('v')}/mqdefault.jpg`;
+  } catch {}
+  return '';
+}
+
+function embedUrl(url) {
+  try {
+    if (url.includes('youtu.be')) return `https://www.youtube.com/embed/${url.split('youtu.be/')[1]?.split('?')[0]}`;
+    if (url.includes('youtube.com/watch')) return `https://www.youtube.com/embed/${new URL(url).searchParams.get('v')}`;
+    if (url.includes('vimeo.com')) return `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]?.split('?')[0]}`;
+  } catch {}
+  return null;
+}
+
+function toast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.textContent=''; t.className='toast';
+  const ic = document.createElement('i');
+  ic.className = type==='ok' ? 'fas fa-check-circle' : 'fas fa-circle-xmark';
+  t.appendChild(ic); t.append(' '+msg);
+  t.classList.add('toast-'+(type==='ok'?'ok':'err'),'show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ─── Auto-show if already logged in ─── */
+if (loggedIn()) {
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('panel').classList.add('on');
+  init();
+}
+</script>
+</body>
+</html>

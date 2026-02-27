@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Kettle Yu</title>
+  <meta name="description" content="A curated collection of design and video work by Kettle Yu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg:#0b0d17; --bg2:#0f1120; --bg3:#141728;
+      --accent:#00f5a0; --accent2:#00c8ff;
+      --text:#e0e6ed; --muted:#6b6b80;
+      --border:rgba(255,255,255,0.07);
+      --card:rgba(255,255,255,0.03);
+      --fh:'Syne',sans-serif; --fb:'DM Sans',sans-serif;
+      --r:16px; --ease:cubic-bezier(.23,1,.32,1);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{font-size:62.5%;scroll-behavior:smooth}
+    body{font-family:var(--fb);background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+    a{text-decoration:none;color:inherit}
+    img,video{max-width:100%;display:block}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+    /* HEADER */
+    .hdr{position:fixed;top:0;left:0;width:100%;z-index:100;background:rgba(11,13,23,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .hdr-in{max-width:1280px;margin:auto;padding:0 4rem;height:7rem;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:1.2rem}
+    .logo-img{width:3.8rem;height:3.8rem;border-radius:50%;border:2px solid var(--accent);object-fit:cover}
+    .logo-name{font-family:var(--fh);font-size:1.8rem;font-weight:700}
+    .logo-name span{color:var(--accent)}
+    .nav{display:flex;align-items:center;gap:.4rem}
+    .nav a{font-size:1.4rem;font-weight:500;color:var(--muted);padding:.8rem 1.6rem;border-radius:8px;transition:color .25s,background .25s}
+    .nav a:hover,.nav a.on{color:var(--accent);background:rgba(0,245,160,.06)}
+    .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+    .ham span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px}
+    .mnav{display:none;position:fixed;top:7rem;left:0;width:100%;background:rgba(11,13,23,.97);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);z-index:99;padding:1rem 0}
+    .mnav.open{display:block}
+    .mnav a{display:block;padding:1.4rem 4rem;font-size:1.6rem;color:var(--muted);border-bottom:1px solid var(--border);transition:color .2s}
+    .mnav a:last-child{border-bottom:none}
+    .mnav a:hover{color:var(--accent)}
+
+    /* HERO */
+    .hero{padding:16rem 0 5rem;position:relative;z-index:1;overflow:hidden}
+    .glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+    .g1{width:50rem;height:50rem;background:rgba(0,245,160,.07);top:-10rem;right:-5rem}
+    .g2{width:35rem;height:35rem;background:rgba(0,200,255,.05);bottom:-5rem;left:-5rem}
+    .hero-in{max-width:1280px;margin:auto;padding:0 4rem;position:relative;z-index:1}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:1.2rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+    .eyebrow::before{content:'';width:28px;height:1px;background:var(--accent)}
+    .htitle{font-family:var(--fh);font-size:clamp(4rem,8vw,8rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:#f0f0f5;margin-bottom:2rem}
+    .htitle span{color:var(--accent)}
+    .hsub{font-size:clamp(1.5rem,2vw,1.8rem);color:var(--muted);max-width:540px;line-height:1.75;margin-bottom:3.5rem}
+
+    /* HERO BUTTONS */
+    .hero-btns{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:4.5rem}
+
+    /* Google Drive button */
+    .btn-drive{display:inline-flex;align-items:center;gap:1rem;padding:1.4rem 2.8rem;border-radius:100px;font-family:var(--fh);font-size:1.5rem;font-weight:700;background:var(--bg3);border:1px solid var(--border);color:var(--text);transition:all .3s var(--ease);position:relative;overflow:hidden;cursor:pointer;text-decoration:none}
+    .btn-drive::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,245,160,.08),rgba(0,200,255,.05));opacity:0;transition:opacity .3s}
+    .btn-drive:hover::before{opacity:1}
+    .btn-drive:hover{border-color:rgba(0,245,160,.35);transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+    .btn-drive svg{width:2.2rem;height:2.2rem;flex-shrink:0}
+    .btn-drive .arr{font-size:1.1rem;opacity:.5;margin-left:2px}
+
+    /* Admin button — visible in hero */
+    .btn-admin{display:inline-flex;align-items:center;gap:1rem;padding:1.4rem 2.8rem;border-radius:100px;font-family:var(--fh);font-size:1.5rem;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,0.12);color:var(--muted);transition:all .3s var(--ease);cursor:pointer;text-decoration:none}
+    .btn-admin:hover{color:var(--accent);border-color:rgba(0,245,160,.35);background:rgba(0,245,160,.06);transform:translateY(-2px)}
+
+    /* Stats */
+    .hstats{display:flex;gap:4rem;flex-wrap:wrap}
+    .snum{font-family:var(--fh);font-size:3.2rem;font-weight:800;color:var(--accent);line-height:1}
+    .slbl{font-size:1.2rem;color:var(--muted);margin-top:4px;letter-spacing:.05em}
+
+    /* FILTER BAR */
+    .fbar{position:sticky;top:7rem;z-index:90;background:rgba(11,13,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1.4rem 0}
+    .fbar-in{max-width:1280px;margin:auto;padding:0 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .ftabs{display:flex;gap:.6rem}
+    .ftab{padding:.9rem 2rem;border-radius:100px;font-size:1.3rem;font-weight:600;color:var(--muted);background:transparent;border:1px solid transparent;cursor:pointer;transition:all .25s;font-family:var(--fb)}
+    .ftab:hover{color:var(--text);border-color:var(--border)}
+    .ftab.on{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+    .fcount{font-size:1.3rem;color:var(--muted)}
+    .fcount span{color:var(--accent);font-weight:700}
+
+    /* GALLERY */
+    .gallery{max-width:1280px;margin:auto;padding:5rem 4rem 10rem;position:relative;z-index:1}
+    .ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem}
+    .card--feat{grid-column:span 2}
+
+    /* Loading */
+    .gload{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 2rem;gap:1.6rem;color:var(--muted);grid-column:1/-1}
+    .spin{width:3.6rem;height:3.6rem;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .gload p{font-size:1.5rem}
+
+    /* CARD */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;animation:fadeUp .5s ease both}
+    .card:hover{transform:translateY(-6px);border-color:rgba(0,245,160,.2);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+    .card-media{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg3)}
+    .card--feat .card-media{aspect-ratio:16/8}
+    .card-media img,.card-media video{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .card:hover .card-media img,.card:hover .card-media video{transform:scale(1.05)}
+    .cbadge{position:absolute;top:1.4rem;left:1.4rem;padding:5px 12px;border-radius:100px;font-size:1.1rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .cbadge--video{background:rgba(0,200,255,.18);color:var(--accent2);border:1px solid rgba(0,200,255,.25)}
+    .cbadge--design{background:rgba(0,245,160,.12);color:var(--accent);border:1px solid rgba(0,245,160,.2)}
+    .cplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);opacity:0;transition:opacity .3s}
+    .card:hover .cplay{opacity:1}
+    .play-icon{width:6rem;height:6rem;border-radius:50%;background:rgba(0,245,160,.92);display:flex;align-items:center;justify-content:center;font-size:2rem;color:#0b0d17;box-shadow:0 0 30px rgba(0,245,160,.5)}
+    .cinfo{padding:2rem 2.4rem 2.4rem}
+    .ccat{font-size:1.1rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+    .ctitle{font-family:var(--fh);font-size:clamp(1.6rem,2vw,2rem);font-weight:700;color:#f0f0f5;margin-bottom:8px;line-height:1.2}
+    .cdesc{font-size:1.3rem;color:var(--muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .cfoot{display:flex;align-items:center;justify-content:space-between;margin-top:1.6rem;padding-top:1.6rem;border-top:1px solid var(--border)}
+    .cyear{font-size:1.2rem;color:var(--muted)}
+    .carr{width:3.4rem;height:3.4rem;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--muted);transition:all .3s}
+    .card:hover .carr{background:var(--accent);border-color:var(--accent);color:#0b0d17}
+
+    .gempty{grid-column:1/-1;text-align:center;padding:8rem 2rem;color:var(--muted)}
+    .gempty i{font-size:4rem;margin-bottom:2rem;opacity:.3;display:block}
+    .gempty p{font-size:1.6rem;margin-bottom:.8rem}
+    .gempty small{font-size:1.3rem;opacity:.6}
+
+    /* ADMIN FAB */
+    .fab{position:fixed;bottom:3rem;right:3rem;z-index:200;display:inline-flex;align-items:center;gap:10px;padding:1.2rem 2.2rem;background:rgba(15,17,32,.92);border:1px solid rgba(255,255,255,.1);border-radius:100px;font-size:1.3rem;font-weight:600;color:var(--muted);cursor:pointer;backdrop-filter:blur(12px);transition:all .3s var(--ease);text-decoration:none}
+    .fab:hover{color:var(--accent);border-color:rgba(0,245,160,.3);background:rgba(0,245,160,.06);transform:translateY(-2px)}
+
+    /* LIGHTBOX */
+    .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.93);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:2rem}
+    .lb.open{display:flex}
+    .lb-close{position:absolute;top:2rem;right:2.5rem;width:4.4rem;height:4.4rem;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--text);font-size:1.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s}
+    .lb-close:hover{background:rgba(255,255,255,.14)}
+    .lb-content{max-width:1100px;width:100%;max-height:90vh;overflow-y:auto}
+    .lb-media{border-radius:12px;overflow:hidden;margin-bottom:2.4rem;background:var(--bg3)}
+    .lb-media img{width:100%;max-height:65vh;object-fit:contain;display:block}
+    .lb-media video{width:100%;max-height:60vh;display:block}
+    .lb-media iframe{width:100%;aspect-ratio:16/9;border:none;display:block}
+    .lb-tag{font-size:1.1rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .lb-title{font-family:var(--fh);font-size:clamp(2.4rem,4vw,3.5rem);font-weight:800;color:#f0f0f5;margin-bottom:1.2rem}
+    .lb-desc{font-size:1.5rem;color:var(--muted);line-height:1.8}
+
+    /* FOOTER */
+    .footer{background:#0a0a0f;border-top:1px solid var(--border);padding:4rem 0;position:relative;z-index:1}
+    .footer-in{max-width:1280px;margin:auto;padding:0 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+    .fbrand{font-family:var(--fh);font-size:2rem;font-weight:800;color:#f0f0f5}
+    .fbrand span{color:var(--accent)}
+    .flinks{display:flex;gap:2.4rem}
+    .flinks a{font-size:1.4rem;color:var(--muted);transition:color .2s}
+    .flinks a:hover{color:var(--accent)}
+    .fcopy{width:100%;text-align:center;font-size:1.3rem;color:#4a4a5a;padding-top:2.5rem;margin-top:2.5rem;border-top:1px solid var(--border)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){html{font-size:57%}.ggrid{grid-template-columns:repeat(2,1fr)}.card--feat{grid-column:span 2}}
+    @media(max-width:768px){html{font-size:54%}.hdr-in,.hero-in,.gallery,.fbar-in,.footer-in{padding-left:2.5rem;padding-right:2.5rem}.nav{display:none}.ham{display:flex}.hero{padding-top:13rem}.ggrid{grid-template-columns:1fr}.card--feat{grid-column:span 1}.fab{bottom:2rem;right:2rem}}
+    @media(max-width:480px){html{font-size:50%}.hero-btns{flex-direction:column}.btn-drive,.btn-admin{width:100%;justify-content:center}}
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a href="./index.html" class="logo">
+      <img src="./assets/png/kettle-yu.png" alt="Kettle Yu" class="logo-img" />
+      <span class="logo-name">Kettle<span>.</span></span>
+    </a>
+    <nav class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./index.html#about">About</a>
+      <a href="./index.html#projects">Projects</a>
+      <a href="./work.html" class="on">Work</a>
+      <a href="./index.html#contact">Contact</a>
+    </nav>
+    <div class="ham" id="hamBtn"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav">
+  <a href="./index.html">Home</a>
+  <a href="./index.html#about">About</a>
+  <a href="./index.html#projects">Projects</a>
+  <a href="./work.html">Work</a>
+  <a href="./index.html#contact">Contact</a>
+</div>
+
+<section class="hero">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="hero-in">
+    <div class="eyebrow">Creative Portfolio</div>
+    <h1 class="htitle">All My <span>Work.</span></h1>
+    <p class="hsub">A curated collection of design projects and video work — from brand identities to motion content.</p>
+
+    <div class="hero-btns">
+      <!-- Google Drive Button — replace YOUR_FOLDER_ID_HERE with your actual Drive folder link -->
+      <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID_HERE"
+         target="_blank" rel="noopener" class="btn-drive">
+        <svg viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+          <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+          <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+          <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+          <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+          <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 27h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+        </svg>
+        View Google Drive
+        <i class="fas fa-arrow-up-right arr"></i>
+      </a>
+
+      <!-- Admin Panel Button -->
+      <a href="./admin.html" class="btn-admin">
+        <i class="fas fa-lock"></i> Admin Panel
+      </a>
+    </div>
+
+    <div class="hstats">
+      <div><div class="snum" id="sTotal">—</div><div class="slbl">Total Works</div></div>
+      <div><div class="snum" id="sDesign">—</div><div class="slbl">Design Projects</div></div>
+      <div><div class="snum" id="sVideo">—</div><div class="slbl">Video Works</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="fbar">
+  <div class="fbar-in">
+    <div class="ftabs">
+      <button class="ftab on" data-f="all">All Work</button>
+      <button class="ftab" data-f="design"><i class="fas fa-palette" style="margin-right:5px"></i>Design</button>
+      <button class="ftab" data-f="video"><i class="fas fa-film" style="margin-right:5px"></i>Video</button>
+    </div>
+    <div class="fcount">Showing <span id="fCount">—</span> works</div>
+  </div>
+</div>
+
+<main class="gallery">
+  <div class="ggrid" id="grid">
+    <div class="gload"><div class="spin"></div><p>Loading works…</p></div>
+  </div>
+</main>
+
+<!-- Admin floating button -->
+<a href="./admin.html" class="fab"><i class="fas fa-lock"></i> Admin</a>
+
+<!-- Lightbox -->
+<div class="lb" id="lb">
+  <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
+  <div class="lb-content">
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-tag" id="lbTag"></div>
+    <h2 class="lb-title" id="lbTitle"></h2>
+    <p class="lb-desc" id="lbDesc"></p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="fbrand">Kettle<span>.</span></div>
+    <div class="flinks">
+      <a href="./index.html">Home</a>
+      <a href="./index.html#projects">Projects</a>
+      <a href="./index.html#contact">Contact</a>
+    </div>
+    <p class="fcopy">&copy; <span id="yr"></span> Kettle Yu. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════
+   JSONBIN CONFIG
+   ────────────────────────────────────────────────
+   HOW TO SET UP (takes 2 minutes):
+   1. Go to https://jsonbin.io → Sign up FREE
+   2. Click "Create Bin" → paste:  {"works":[]}  → Save
+   3. Copy the BIN ID from the URL bar
+   4. Go to API Keys tab → copy your Master Key
+   5. Paste both values below and save the file
+   ════════════════════════════════════════════════ */
+const BIN_ID  = 'https://api.jsonbin.io/v3/b/69a1bb76ae596e708f4fb845';
+const API_KEY = '$2a$10$XBq7Ft..xtvrP4BtB1qlVe/xRldmMvsf4ilmY8Sk5J58qn2sIkeWe';
+
+async function loadWorks() {
+  if (BIN_ID === 'YOUR_BIN_ID_HERE') return getDemoWorks();
+  try {
+    const r = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: { 'X-Master-Key': API_KEY }
+    });
+    const d = await r.json();
+    return d.record?.works || [];
+  } catch { return []; }
+}
+
+function getDemoWorks() {
+  return [
+    { id:1, title:'Community Of Wealth', type:'design', category:'Flyer Design', year:2025, url:'./assets/jpeg/4e132.jpeg', desc:'Bold personal flyer design with strong typography and intentional colour choices.', thumbnail:'' },
+    { id:2, title:'Our Haven', type:'design', category:'Brand Identity', year:2025, url:'./assets/jpeg/Temp 2.jpeg', desc:'Brand design for a convenient lifestyle platform — food, laundry, and home cleaning.', thumbnail:'' },
+    { id:3, title:'Colour Grading', type:'design', category:'Photo Editing', year:2026, url:'./assets/jpeg/IMG-20260226-WA0056.jpg', desc:'Colour grading, retouching, and compositing for a fashion photoshoot.', thumbnail:'' }
+  ];
+}
+
+function ytThumb(url) {
+  try {
+    if (url.includes('youtu.be')) return `https://img.youtube.com/vi/${url.split('youtu.be/')[1]?.split('?')[0]}/hqdefault.jpg`;
+    if (url.includes('youtube.com/watch')) return `https://img.youtube.com/vi/${new URL(url).searchParams.get('v')}/hqdefault.jpg`;
+  } catch {}
+  return '';
+}
+
+function embedUrl(url) {
+  try {
+    if (url.includes('youtu.be')) return `https://www.youtube.com/embed/${url.split('youtu.be/')[1]?.split('?')[0]}?autoplay=1`;
+    if (url.includes('youtube.com/watch')) return `https://www.youtube.com/embed/${new URL(url).searchParams.get('v')}?autoplay=1`;
+    if (url.includes('vimeo.com')) return `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]?.split('?')[0]}?autoplay=1`;
+  } catch {}
+  return null;
+}
+
+let ALL = [], curFilter = 'all';
+
+function render(works, filter) {
+  const list = filter === 'all' ? works : works.filter(w => w.type === filter);
+  document.getElementById('sTotal').textContent  = works.length;
+  document.getElementById('sDesign').textContent = works.filter(w=>w.type==='design').length;
+  document.getElementById('sVideo').textContent  = works.filter(w=>w.type==='video').length;
+  document.getElementById('fCount').textContent  = list.length;
+  const g = document.getElementById('grid');
+  if (!list.length) {
+    g.innerHTML = `<div class="gempty"><i class="fas fa-images"></i><p>No works yet.</p><small>Check back soon.</small></div>`;
+    return;
+  }
+  g.innerHTML = list.map((w,i) => {
+    const feat = i===0 && filter==='all';
+    const isVid = w.type==='video';
+    const thumb = isVid ? (w.thumbnail || ytThumb(w.url)) : w.url;
+    return `<div class="card${feat?' card--feat':''}" style="animation-delay:${i*.07}s" onclick="openLb(${i},'${filter}')">
+      <div class="card-media">
+        <img src="${thumb}" alt="${w.title}" loading="lazy" />
+        <span class="cbadge cbadge--${w.type}">${w.type}</span>
+        ${isVid?`<div class="cplay"><div class="play-icon"><i class="fas fa-play"></i></div></div>`:''}
+      </div>
+      <div class="cinfo">
+        <div class="ccat">${w.category||w.type}</div>
+        <h3 class="ctitle">${w.title}</h3>
+        <p class="cdesc">${w.desc||''}</p>
+        <div class="cfoot"><span class="cyear">${w.year||''}</span><span class="carr"><i class="fas fa-arrow-up-right"></i></span></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openLb(i, filter) {
+  const list = filter==='all' ? ALL : ALL.filter(w=>w.type===filter);
+  const w = list[i]; if(!w) return;
+  document.getElementById('lbTag').textContent   = `${w.type} — ${w.category||''}`;
+  document.getElementById('lbTitle').textContent = w.title;
+  document.getElementById('lbDesc').textContent  = w.desc||'';
+  const m = document.getElementById('lbMedia');
+  if (w.type==='video') {
+    const em = embedUrl(w.url);
+    m.innerHTML = em ? `<iframe src="${em}" allowfullscreen allow="autoplay"></iframe>`
+                     : `<video src="${w.url}" controls autoplay></video>`;
+  } else {
+    m.innerHTML = `<img src="${w.url}" alt="${w.title}" />`;
+  }
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLb() {
+  document.getElementById('lb').classList.remove('open');
+  document.getElementById('lbMedia').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('lbClose').onclick = closeLb;
+document.getElementById('lb').onclick = e => { if(e.target===document.getElementById('lb')) closeLb(); };
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
+
+document.querySelectorAll('.ftab').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.ftab').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    curFilter = b.dataset.f;
+    render(ALL, curFilter);
+  });
+});
+
+document.getElementById('hamBtn').onclick = () => document.getElementById('mnav').classList.toggle('open');
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+loadWorks().then(w => { ALL=w; render(ALL,'all'); });
+</script>
+</body>
+</html>
