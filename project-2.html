@@ -21,29 +21,25 @@
       .cs-hero {
         position: relative;
         background: #0a0a0f;
-        padding: 160px 0 110px;
+        padding: 140px 0 80px;
         overflow: hidden;
       }
 
       .cs-hero::before {
         content: '';
         position: absolute;
-        width: 700px;
-        height: 700px;
+        width: 700px; height: 700px;
         background: radial-gradient(circle, rgba(0,245,160,0.06) 0%, transparent 70%);
-        top: -200px;
-        right: -200px;
+        top: -200px; right: -200px;
         pointer-events: none;
       }
 
       .cs-hero::after {
         content: '';
         position: absolute;
-        width: 400px;
-        height: 400px;
+        width: 400px; height: 400px;
         background: radial-gradient(circle, rgba(0,217,245,0.05) 0%, transparent 70%);
-        bottom: -100px;
-        left: -100px;
+        bottom: -100px; left: -100px;
         pointer-events: none;
       }
 
@@ -57,22 +53,19 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        font-size: 0.95rem;
+        font-size: 1.4rem;
         color: #6b6b80;
         text-decoration: none;
-        margin-bottom: 36px;
+        margin-bottom: 32px;
         transition: color 0.25s ease, gap 0.25s ease;
       }
 
-      .cs-hero__back:hover {
-        color: #00f5a0;
-        gap: 12px;
-      }
+      .cs-hero__back:hover { color: #00f5a0; gap: 12px; }
 
       .cs-hero__meta {
         display: flex;
         gap: 10px;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
         flex-wrap: wrap;
       }
 
@@ -81,26 +74,26 @@
         border-radius: 100px;
         background: rgba(255,255,255,0.05);
         border: 1px solid rgba(255,255,255,0.1);
-        font-size: 0.85rem;
+        font-size: 1.3rem;
         color: #9a9aaa;
         letter-spacing: 0.05em;
       }
 
       .cs-hero__title {
-        font-size: clamp(3rem, 6.5vw, 5.5rem);
+        font-size: clamp(3.5rem, 7vw, 6rem);
         font-weight: 900;
         letter-spacing: -0.03em;
         line-height: 1.05;
         color: #f0f0f5;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
       }
 
       .cs-hero__desc {
-        font-size: 1.25rem;
+        font-size: clamp(1.4rem, 2vw, 1.7rem);
         line-height: 1.85;
         color: #7a7a8c;
         max-width: 600px;
-        margin-bottom: 44px;
+        margin-bottom: 36px;
       }
 
       .cs-hero__actions {
@@ -113,9 +106,9 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 15px 30px;
+        padding: 1.4rem 3rem;
         border-radius: 100px;
-        font-size: 1rem;
+        font-size: 1.5rem;
         font-weight: 700;
         text-decoration: none;
         transition: all 0.3s ease;
@@ -127,10 +120,7 @@
         border: 2px solid #00f5a0;
       }
 
-      .cs-btn--primary:hover {
-        opacity: 0.85;
-        gap: 14px;
-      }
+      .cs-btn--primary:hover { opacity: 0.85; gap: 14px; }
 
       .cs-btn--outline {
         background: transparent;
@@ -148,16 +138,15 @@
       ══════════════════════════════ */
       .cs-body {
         background: #0d0d12;
-        padding: 0 0 120px;
+        padding: 0 0 100px;
       }
 
-      /* Showcase image */
       .cs-showcase {
-        margin-bottom: 72px;
+        margin-bottom: 56px;
         border-radius: 20px;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.07);
-        transform: translateY(-56px);
+        transform: translateY(-48px);
         box-shadow: 0 40px 100px rgba(0,0,0,0.55);
       }
 
@@ -166,19 +155,15 @@
         display: block;
       }
 
-      /* Stats row */
+      /* Stats */
       .cs-stats {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 2px;
-        margin-bottom: 80px;
+        margin-bottom: 64px;
         border-radius: 18px;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.07);
-      }
-
-      @media (max-width: 640px) {
-        .cs-stats { grid-template-columns: repeat(2, 1fr); }
       }
 
       .cs-stats__item {
@@ -193,7 +178,7 @@
       }
 
       .cs-stats__number {
-        font-size: 2.6rem;
+        font-size: clamp(2.8rem, 5vw, 4rem);
         font-weight: 900;
         letter-spacing: -0.03em;
         color: #00f5a0;
@@ -201,42 +186,39 @@
       }
 
       .cs-stats__label {
-        font-size: 0.88rem;
+        font-size: 1.3rem;
         color: #6b6b80;
         letter-spacing: 0.05em;
       }
 
-      /* Content layout */
+      /* Content */
       .cs-content {
         display: flex;
         flex-direction: column;
-        gap: 80px;
+        gap: 64px;
       }
 
-      /* Eyebrow */
       .cs-eyebrow {
         display: inline-block;
-        font-size: 0.8rem;
+        font-size: 1.2rem;
         font-weight: 700;
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: #00f5a0;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
       }
 
-      /* Section title */
       .cs-title {
-        font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+        font-size: clamp(2.2rem, 4vw, 3.2rem);
         font-weight: 800;
         letter-spacing: -0.02em;
         color: #f0f0f5;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         line-height: 1.15;
       }
 
-      /* Body text */
       .cs-text {
-        font-size: 1.15rem;
+        font-size: clamp(1.4rem, 2vw, 1.7rem);
         line-height: 1.95;
         color: #7a7a8c;
         margin-bottom: 20px;
@@ -245,58 +227,7 @@
 
       .cs-text:last-child { margin-bottom: 0; }
 
-      /* Problem / Solution split */
-      .cs-split {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-
-      @media (max-width: 640px) {
-        .cs-split { grid-template-columns: 1fr; }
-      }
-
-      .cs-split__card {
-        padding: 40px 36px;
-        background: rgba(255,255,255,0.03);
-        border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 20px;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-      }
-
-      .cs-split__card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(255,255,255,0.13);
-      }
-
-      .cs-split__icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        background: rgba(0,245,160,0.08);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-        color: #00f5a0;
-        margin-bottom: 22px;
-      }
-
-      .cs-split__title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #f0f0f5;
-        margin-bottom: 14px;
-        letter-spacing: -0.01em;
-      }
-
-      .cs-split__text {
-        font-size: 1.05rem;
-        line-height: 1.85;
-        color: #7a7a8c;
-      }
-
-      /* Tools tags */
+      /* Tools */
       .cs-tools {
         display: flex;
         flex-wrap: wrap;
@@ -304,11 +235,11 @@
       }
 
       .cs-tools__tag {
-        padding: 11px 22px;
+        padding: 1rem 2rem;
         background: rgba(255,255,255,0.04);
         border: 1px solid rgba(255,255,255,0.08);
         border-radius: 100px;
-        font-size: 0.95rem;
+        font-size: 1.4rem;
         font-weight: 500;
         color: #9a9aaa;
         transition: all 0.25s ease;
@@ -321,13 +252,13 @@
         color: #f0f0f5;
       }
 
-      /* CTA block */
+      /* CTA */
       .cs-cta {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 40px;
-        padding: 52px;
+        gap: 32px;
+        padding: 5rem;
         background: rgba(255,255,255,0.03);
         border: 1px solid rgba(255,255,255,0.07);
         border-radius: 24px;
@@ -335,7 +266,7 @@
       }
 
       .cs-cta__desc {
-        font-size: 1.05rem;
+        font-size: 1.5rem;
         color: #7a7a8c;
         margin-top: 8px;
         line-height: 1.75;
@@ -350,7 +281,28 @@
       }
 
       /* ══════════════════════════════
-         FOOTER (updated)
+         RESPONSIVE
+      ══════════════════════════════ */
+      @media (max-width: 768px) {
+        .cs-hero { padding: 110px 0 60px; }
+        .cs-hero__title { margin-bottom: 18px; }
+        .cs-showcase { transform: translateY(-32px); margin-bottom: 40px; }
+        .cs-cta { padding: 3.5rem; flex-direction: column; align-items: flex-start; }
+        .cs-cta__actions { width: 100%; }
+        .cs-btn { width: 100%; justify-content: center; }
+        .cs-hero__actions { flex-direction: column; }
+        .cs-hero__actions .cs-btn { width: 100%; max-width: 32rem; justify-content: center; }
+      }
+
+      @media (max-width: 480px) {
+        .cs-hero { padding: 100px 0 50px; }
+        .cs-showcase { transform: translateY(-24px); border-radius: 14px; }
+        .cs-content { gap: 48px; }
+        .cs-cta { padding: 2.8rem 2.4rem; }
+      }
+
+      /* ══════════════════════════════
+         FOOTER
       ══════════════════════════════ */
       .main-footer {
         background: #0a0a0f;
@@ -373,10 +325,11 @@
 
       @media (max-width: 560px) {
         .main-footer__upper { grid-template-columns: 1fr; }
+        .main-footer__lower { flex-direction: column; text-align: center; }
       }
 
       .main-footer__logo {
-        font-size: 2.6rem;
+        font-size: 2.8rem;
         font-weight: 800;
         letter-spacing: -0.04em;
         color: #f0f0f5;
@@ -387,7 +340,7 @@
       .main-footer__logo span { color: #00f5a0; }
 
       .main-footer__desc {
-        font-size: 1rem;
+        font-size: 1.5rem;
         line-height: 1.8;
         color: #6b6b80;
         max-width: 340px;
@@ -398,11 +351,11 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 12px 26px;
+        padding: 1.2rem 2.6rem;
         border-radius: 100px;
         border: 1px solid rgba(255,255,255,0.15);
         color: #f0f0f5;
-        font-size: 0.9rem;
+        font-size: 1.4rem;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
@@ -416,7 +369,7 @@
       }
 
       .main-footer__col-title {
-        font-size: 0.75rem;
+        font-size: 1.2rem;
         font-weight: 700;
         letter-spacing: 0.16em;
         text-transform: uppercase;
@@ -426,15 +379,14 @@
 
       .main-footer__links {
         list-style: none;
-        padding: 0;
-        margin: 0;
+        padding: 0; margin: 0;
         display: flex;
         flex-direction: column;
         gap: 14px;
       }
 
       .main-footer__links a {
-        font-size: 1rem;
+        font-size: 1.5rem;
         color: #9a9aaa;
         text-decoration: none;
         display: inline-flex;
@@ -446,18 +398,13 @@
       .main-footer__links a::before {
         content: '';
         display: block;
-        width: 16px;
-        height: 1px;
+        width: 16px; height: 1px;
         background: #00f5a0;
         opacity: 0;
         transition: opacity 0.25s ease;
       }
 
-      .main-footer__links a:hover {
-        color: #f0f0f5;
-        gap: 12px;
-      }
-
+      .main-footer__links a:hover { color: #f0f0f5; gap: 12px; }
       .main-footer__links a:hover::before { opacity: 1; }
 
       .main-footer__social-cont {
@@ -470,22 +417,17 @@
         display: flex;
         align-items: center;
         gap: 14px;
-        padding: 12px 16px;
+        padding: 1.1rem 1.6rem;
         border-radius: 12px;
         background: rgba(255,255,255,0.03);
         border: 1px solid rgba(255,255,255,0.06);
         text-decoration: none;
         color: #9a9aaa;
-        font-size: 0.92rem;
+        font-size: 1.4rem;
         transition: all 0.3s ease;
       }
 
-      .main-footer__social-link i {
-        font-size: 1.1rem;
-        width: 20px;
-        text-align: center;
-      }
-
+      .main-footer__social-link i { font-size: 1.6rem; width: 20px; text-align: center; }
       .main-footer__social-link:hover { transform: translateX(4px); color: #fff; }
       .main-footer__social-link--linkedin:hover  { background: rgba(10,102,194,0.15);  border-color: rgba(10,102,194,0.25); }
       .main-footer__social-link--github:hover    { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); }
@@ -503,16 +445,8 @@
       }
 
       .main-footer__copy,
-      .main-footer__credit {
-        font-size: 0.88rem;
-        color: #4a4a5a;
-      }
-
-      .main-footer__credit i {
-        color: #e03c6b;
-        font-size: 0.75rem;
-        margin: 0 2px;
-      }
+      .main-footer__credit { font-size: 1.3rem; color: #4a4a5a; }
+      .main-footer__credit i { color: #e03c6b; font-size: 1.1rem; margin: 0 2px; }
     </style>
   </head>
   <body>
@@ -522,10 +456,9 @@
       <div class="header__content">
         <div class="header__logo-container">
           <div class="header__logo-img-cont">
-            <img src="./assets/png/kettle-yu.png" alt="John Doe Logo" class="header__logo-img" />
+            <img src="./assets/png/kettle-yu.png" alt="Kettle Yu Logo" class="header__logo-img" />
           </div>
-          <span class="header__logo-sub">Kettle Yu
-          </span>
+          <span class="header__logo-sub">Kettle Yu</span>
         </div>
         <div class="header__main">
           <ul class="header__links">
@@ -563,18 +496,17 @@
             <span class="cs-hero__tag">Flyer Design</span>
             <span class="cs-hero__tag">2025</span>
           </div>
-          <h1 class="cs-hero__title">Project 2</h1>
+          <h1 class="cs-hero__title">Our Haven</h1>
           <p class="cs-hero__desc">
-            Our Haven — Your Time, Reimagined
-Delicious meals, laundry care, and wellness support — all in one app.
+            Your Time, Reimagined — delicious meals, laundry care, and wellness support, all in one app.
           </p>
           <div class="cs-hero__actions">
             <a href="https://ourhaven.app/" class="cs-btn cs-btn--primary" target="_blank">
               <i class="fas fa-external-link-alt"></i> View Brand
             </a>
             <a href="https://files.catbox.moe/09xmsb.mp4" class="cs-btn cs-btn--outline" target="_blank">
-  <i class="fas fa-circle-play"></i> View Design
-</a>
+              <i class="fas fa-circle-play"></i> View Design
+            </a>
           </div>
         </div>
       </div>
@@ -586,7 +518,7 @@ Delicious meals, laundry care, and wellness support — all in one app.
 
         <!-- Showcase Image -->
         <div class="cs-showcase">
-          <img src="./assets/jpeg/Temp 2.jpeg" alt="Project Mockup" class="cs-showcase__img" />
+          <img src="./assets/jpeg/Temp 2.jpeg" alt="Our Haven Design" class="cs-showcase__img" />
         </div>
 
         <!-- Stats -->
@@ -599,6 +531,7 @@ Delicious meals, laundry care, and wellness support — all in one app.
             <span class="cs-stats__number">4</span>
             <span class="cs-stats__label">Tools Used</span>
           </div>
+        </div>
 
         <!-- Content Blocks -->
         <div class="cs-content">
@@ -608,24 +541,35 @@ Delicious meals, laundry care, and wellness support — all in one app.
             <span class="cs-eyebrow">01 — Overview</span>
             <h2 class="cs-title">Website Overview</h2>
             <p class="cs-text">
-             Your most convenient platform to get your food with eco-friendly packaging delivered to your doorstep, your laundry done, and your home cleaned.
+              Your most convenient platform to get your food with eco-friendly packaging delivered to your doorstep, your laundry done, and your home cleaned. Our Haven brings essential daily services together in one seamless experience.
             </p>
           </div>
 
+          <!-- Tools Used -->
+          <div class="cs-block">
+            <span class="cs-eyebrow">02 — Tools</span>
+            <h2 class="cs-title">Tools Used</h2>
+            <div class="cs-tools">
+              <span class="cs-tools__tag">Adobe Photoshop</span>
+              <span class="cs-tools__tag">Adobe Illustrator</span>
+              <span class="cs-tools__tag">After Effects</span>
+              <span class="cs-tools__tag">Figma</span>
+            </div>
+          </div>
 
           <!-- CTA -->
           <div class="cs-cta">
             <div class="cs-cta__text">
               <span class="cs-eyebrow">03 — Links</span>
               <h2 class="cs-title" style="margin-bottom: 8px;">See It Live</h2>
-              <p class="cs-cta__desc">Check out the live Website</p>
+              <p class="cs-cta__desc">Check out the live website and full design</p>
             </div>
             <div class="cs-cta__actions">
               <a href="https://ourhaven.app/" class="cs-btn cs-btn--primary" target="_blank">
                 <i class="fas fa-external-link-alt"></i> View Brand
               </a>
               <a href="https://files.catbox.moe/09xmsb.mp4" class="cs-btn cs-btn--outline" target="_blank">
-  <i class="fas fa-circle-play"></i> View Design
+                <i class="fas fa-circle-play"></i> View Design
               </a>
             </div>
           </div>
@@ -639,9 +583,8 @@ Delicious meals, laundry care, and wellness support — all in one app.
       <div class="main-container">
         <div class="main-footer__upper">
 
-          <!-- Brand -->
           <div class="main-footer__brand">
-            <h2 class="main-footer__logo">Kettle<span>Yu</span></h2>
+            <h2 class="main-footer__logo">Kettle<span>.</span></h2>
             <p class="main-footer__desc">
               A Digital Creative Designer building bold visuals and compelling brand
               experiences that communicate with clarity and purpose.
@@ -651,7 +594,6 @@ Delicious meals, laundry care, and wellness support — all in one app.
             </a>
           </div>
 
-          <!-- Nav -->
           <div class="main-footer__nav">
             <h3 class="main-footer__col-title">Navigate</h3>
             <ul class="main-footer__links">
@@ -661,7 +603,6 @@ Delicious meals, laundry care, and wellness support — all in one app.
             </ul>
           </div>
 
-          <!-- Social -->
           <div class="main-footer__social-wrap">
             <h3 class="main-footer__col-title">Find Me On</h3>
             <div class="main-footer__social-cont">
