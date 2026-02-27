@@ -1350,3 +1350,78 @@ img { max-width: 100%; height: auto; display: block; }
     min-height: 44px;
   }
 }
+
+
+/* ============================================================
+   FOOTER — MOBILE FIX
+   Paste this at the very bottom of your css/style.css
+   ============================================================ */
+
+/* Tablet: 2-column, brand spans full width */
+@media only screen and (max-width: 1024px) {
+  .main-footer__upper {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4rem !important;
+  }
+  .main-footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Mobile: everything stacks in a single column */
+@media only screen and (max-width: 600px) {
+  .main-footer {
+    padding-top: 5rem;
+  }
+
+  .main-footer__upper {
+    grid-template-columns: 1fr !important;
+    gap: 3.5rem !important;
+    padding-bottom: 4rem;
+  }
+
+  .main-footer__brand {
+    grid-column: auto;
+  }
+
+  .main-footer__logo {
+    font-size: 2.4rem !important;
+  }
+
+  .main-footer__desc {
+    max-width: 100%;
+    font-size: 1.4rem;
+  }
+
+  .main-footer__cta {
+    width: fit-content;
+  }
+
+  /* Nav links: wrap into a row instead of tall column */
+  .main-footer__links {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 1rem 2.4rem !important;
+  }
+
+  /* Social icons: 2 per row grid */
+  .main-footer__social-cont {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem !important;
+  }
+
+  /* Bottom bar: stacked + centered */
+  .main-footer__lower {
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    padding: 2rem 0;
+  }
+
+  .main-footer__copy,
+  .main-footer__credit {
+    font-size: 1.2rem;
+  }
+}
