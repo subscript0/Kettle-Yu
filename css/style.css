@@ -393,11 +393,31 @@ img { max-width: 100%; height: auto; display: block; }
   position: relative;
   overflow: hidden;
   padding: 10rem 2rem 6rem;
+
+  /* ── Custom background image — ONLY applies to the hero section ── */
+  background-image: url('../assets/jpeg/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
+/* Semi-transparent dark overlay — improves text readability over the image.
+   Sits above the image but below all hero content via z-index layering.     */
+.home-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hero content — z-index: 2 keeps it above the ::before overlay */
 .home-hero__content {
   text-align: center;
   z-index: 2;
+  position: relative;
   max-width: 90rem;
   width: 100%;
 }
@@ -422,7 +442,7 @@ img { max-width: 100%; height: auto; display: block; }
   flex-wrap: wrap;
 }
 
-/* Social sidebar — desktop */
+/* Social sidebar — desktop — z-index: 5 keeps it above overlay */
 .home-hero__socials {
   position: absolute;
   top: 50%;
@@ -457,11 +477,13 @@ img { max-width: 100%; height: auto; display: block; }
   object-fit: contain;
 }
 
+/* Scroll indicator — z-index: 5 keeps it above overlay */
 .home-hero__mouse-scroll-cont {
   position: absolute;
   bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 5;
 }
 
 /* --------------------------------------------------------------------------
