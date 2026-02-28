@@ -396,7 +396,7 @@ img { max-width: 100%; height: auto; display: block; }
 
   /* ── Custom background image — ONLY applies to the hero section ── */
   background-image: url('../assets/jpeg/hero-bg.jpg');
-  background-size: 70%;
+  background-size: 420px 420px;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
